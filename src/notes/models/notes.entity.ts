@@ -8,6 +8,9 @@ export class NoteEntity {
   @Column({ default: '' })
   text: string;
 
+  @Column({ default: false })
+  archived: boolean;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 }

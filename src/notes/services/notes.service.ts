@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -29,6 +29,23 @@ export class NotesService {
 
   updateNote(id: number, noteData: NoteI): Observable<UpdateResult> {
     return from(this.notesRepository.update(id, noteData));
+  }
+
+  async archiveNote(id: number): Promise<Observable<UpdateResult>> {
+    try {
+      const noteData = await this.notesRepository.findOneBy({ id: id });
+
+      // If note exist
+      if (noteData != null) {
+        const updatedNoteData = { ...noteData, archived: !noteData.archived };
+
+        return from(this.notesRepository.update(id, updatedNoteData));
+      } else {
+        throw new NotFoundException('Could not find note');
+      }
+    } catch (error) {
+      throw new NotFoundException('Could not find note');
+    }
   }
 
   deleteNote(id: number): Observable<DeleteResult> {

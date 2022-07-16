@@ -26,9 +26,13 @@ export class NotesController {
   }
 
   @Put(':id')
-  // eslint-disable-next-line prettier/prettier
   updateNote(@Param('id') id: number, @Body() noteData: NoteI): Observable<UpdateResult> {
     return this.noteService.updateNote(id, noteData);
+  }
+
+  @Put('/archive/:id')
+  async archiveNote(@Param('id') id: number): Promise<Observable<UpdateResult>> {
+    return await this.noteService.archiveNote(id);
   }
 
   @Delete(':id')

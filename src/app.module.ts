@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { NotesModule } from './notes/notes.module';
+import { CategoriesModule } from './categories/categories.module';
 
 // Notes
 
@@ -28,6 +29,7 @@ import { NotesModule } from './notes/notes.module';
       retryAttempts: 10,
     }),
     NotesModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

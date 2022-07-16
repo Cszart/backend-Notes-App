@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { CategoriesEntity } from 'src/categories/models/categories.entity';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('note')
 export class NoteEntity {
@@ -13,4 +14,16 @@ export class NoteEntity {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
+
+  @ManyToMany(() => CategoriesEntity, category => category.notes)
+  @JoinTable({
+    name: 'notes_categories',
+    joinColumn: {
+      name: 'note_id',
+    },
+    inverseJoinColumn: {
+      name: 'categories_id',
+    },
+  })
+  categories: CategoriesEntity[];
 }

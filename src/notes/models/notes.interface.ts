@@ -1,3 +1,5 @@
+import { CategoryI } from 'src/categories/models/categories.interface';
+
 // Basic structure
 export interface NoteI {
   id?: number;
@@ -5,4 +7,6 @@ export interface NoteI {
   archived: boolean;
 
   createdAt?: Date;
+
+  categories: CategoryI[];
 }

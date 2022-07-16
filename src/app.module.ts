@@ -17,6 +17,8 @@ import { CategoriesModule } from './categories/categories.module';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
+      url: process.env.POSTGRES_HOST,
+      ssl: { rejectUnauthorized: false },
       host: process.env.POSTGRES_HOST,
       port: parseInt(<string>process.env.POSTGRES_PORT),
       username: process.env.POSTGRES_USER,

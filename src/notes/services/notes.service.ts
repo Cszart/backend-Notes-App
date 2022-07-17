@@ -64,7 +64,7 @@ export class NotesService {
 
   // Find Archive
   async findArchivedNotes(archive: boolean): Promise<NoteI[]> {
-    return await this.notesRepository.find({ where: { archived: archive } });
+    return await this.notesRepository.find({ where: { archived: archive }, relations: ['categories'] });
   }
 
   // Find by category

@@ -7,6 +7,9 @@ export class NoteEntity {
   id: number;
 
   @Column({ default: '' })
+  title: string;
+
+  @Column({ default: '' })
   text: string;
 
   @Column({ default: false })

@@ -77,6 +77,11 @@ export class NotesService {
     const updatedNote = await this.notesRepository.findOne({ where: { id: id } });
 
     // Add text
+    if (noteData.title != null && noteData.title != undefined) {
+      updatedNote.title = noteData.title;
+    }
+
+    // Add text
     if (noteData.text != null && noteData.text != undefined) {
       updatedNote.text = noteData.text;
     }

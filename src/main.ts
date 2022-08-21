@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-import cors from 'cors';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const cors = require('cors');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

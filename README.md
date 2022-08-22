@@ -30,6 +30,12 @@ $ npm run start:prod
 
 You can check documentation and endpoints on [Postman](https://www.postman.com/cesaralone/workspace/e6700d6d-2195-4fb8-8e60-5d623819838b/overview) make sure to open "Documentation" tab
 
+## Online server
+
+If you want to test out the API on a running heroku server check this [Link](https://cesar-notes-api.herokuapp.com/api)
+
+To test the API with a web interface check [Frontend App](https://cesar-notes-app.herokuapp.com/)
+
 ## Tecnologies
 
 - NPM: 8.1.2

@@ -1,6 +1,16 @@
 ## Description
 
-This is an API used to manage your notes where you can: - Create a note - Update a note - Delete a note - Archive and unarchive a note - Create a category - Update a category - Delete a category - Add categories to a note - Remove categories from a note
+This is an API used to manage your notes where you can:
+
+- Create a note
+- Update a note
+- Delete a note
+- Archive and unarchive a note
+- Create a category
+- Update a category
+- Delete a category
+- Add categories to a note
+- Remove categories from a note
 
 This project was develop using [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository and typeORM for PostgreSQL.
 
@@ -22,10 +32,10 @@ You can check documentation and endpoints on [Postman](https://www.postman.com/c
 
 ## Tecnologies
 
-NPM: 8.1.2
-NodeJS: 16.13.1
-NestJS: 9.0.0
-TypeORM: 0.3.7
+- NPM: 8.1.2
+- NodeJS: 16.13.1
+- NestJS: 9.0.0
+- TypeORM: 0.3.7
 
 No need to install PostgreSQL because app is connecting to remote server where the database is installed, this is a better approach to persist data and to avoid any further configuration or installation
 

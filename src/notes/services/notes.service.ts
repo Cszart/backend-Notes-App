@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { DeleteResult, In, Repository } from 'typeorm';
+import { DeleteResult, ILike, In, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { NoteEntity } from '../models/notes.entity';
@@ -67,9 +67,17 @@ export class NotesService {
     return await this.notesRepository.find({ where: { archived: archive }, relations: ['categories'] });
   }
 
-  // Find by category
+  // Find by category ID
   async findNotesByCategory(categoryID: number): Promise<NoteI[]> {
     return await this.notesRepository.find({ where: { categories: { id: categoryID } }, relations: ['categories'] });
+  }
+
+  // Find by category NAME
+  async findNotesByCategoryName(categoryName: string): Promise<NoteI[]> {
+    return await this.notesRepository.find({
+      where: { categories: { name: ILike(categoryName) } },
+      relations: ['categories'],
+    });
   }
 
   // Update

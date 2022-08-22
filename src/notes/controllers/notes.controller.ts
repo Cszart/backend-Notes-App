@@ -38,11 +38,18 @@ export class NotesController {
     return await this.noteService.findArchivedNotes(archive);
   }
 
-  // Find by category
+  // Find by category id
 
   @Get('/category/:categoryID')
-  async findNotesByCategory(@Param('categoryID') categoryID: number): Promise<NoteI[]> {
+  async findNotesByCategoryId(@Param('categoryID') categoryID: number): Promise<NoteI[]> {
     return await this.noteService.findNotesByCategory(categoryID);
+  }
+
+  // Find by category name
+
+  @Get('/categoryByName/:categoryName')
+  async findNotesByCategoryName(@Param('categoryName') categoryName: string): Promise<NoteI[]> {
+    return await this.noteService.findNotesByCategoryName(categoryName);
   }
 
   // Update

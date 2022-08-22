@@ -107,6 +107,64 @@ export class NotesService {
     return from(this.notesRepository.save(updatedNote));
   }
 
+  // Add Categories
+  async addCategories(id: number, categoriesIDs: number[]): Promise<Observable<NoteI>> {
+    // Search for the note
+    const updatedNote = await this.notesRepository.findOne({ where: { id: id }, relations: ['categories'] });
+
+    // If there is an input
+    if (categoriesIDs != null && categoriesIDs != undefined && categoriesIDs.length > 0) {
+      try {
+        // Filter new categories to add
+        const newCategoriesIDs = categoriesIDs
+          .map(id => {
+            // Filter the current note categories to see if the new category is already added
+            const isInCategoriesArray = updatedNote.categories.filter(category_item => category_item.id === id);
+
+            // If it has at least one item then newCategory is already added
+            if (isInCategoriesArray.length === 0) {
+              return id;
+            }
+          })
+          .filter(item => item !== undefined);
+
+        // Get categories from DB
+        const categoriesData = await this.categoryRepository.find({
+          where: { id: In(newCategoriesIDs) },
+        });
+
+        // If categories exists
+        if (categoriesData != null && categoriesData != undefined) {
+          updatedNote.categories = updatedNote.categories.concat(categoriesData);
+        }
+      } catch (error) {
+        throw new NotFoundException('Could not find category');
+      }
+    }
+
+    // Save
+    return from(this.notesRepository.save(updatedNote));
+  }
+
+  // Remove Categories
+  async removeCategories(id: number, categoriesIDs: number[]): Promise<Observable<NoteI>> {
+    // Search for the note
+    const updatedNote = await this.notesRepository.findOne({ where: { id: id }, relations: ['categories'] });
+
+    // If categories ids not empty
+    if (categoriesIDs != null && categoriesIDs != undefined && categoriesIDs.length > 0) {
+      // Filter categories to emove
+      const categoriesRemoved = updatedNote.categories.filter(
+        category_item => !categoriesIDs.includes(category_item.id),
+      );
+
+      updatedNote.categories = categoriesRemoved;
+    }
+
+    // Save
+    return from(this.notesRepository.save(updatedNote));
+  }
+
   // Archive
   async archiveNote(id: number): Promise<Observable<NoteI>> {
     try {

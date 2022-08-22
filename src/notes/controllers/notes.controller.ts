@@ -52,6 +52,23 @@ export class NotesController {
     return this.noteService.updateNote(id, noteData);
   }
 
+  // Add categories
+
+  @Put('/addCategories/:id')
+  async addCategories(@Param('id') id: number, @Body() body: { categoriesIDs: number[] }): Promise<Observable<NoteI>> {
+    return this.noteService.addCategories(id, body.categoriesIDs);
+  }
+
+  // Remove categories
+
+  @Put('/removeCategories/:id')
+  async removeCategories(
+    @Param('id') id: number,
+    @Body() body: { categoriesIDs: number[] },
+  ): Promise<Observable<NoteI>> {
+    return this.noteService.removeCategories(id, body.categoriesIDs);
+  }
+
   // Archive
 
   @Put('/archive/:id')

@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# In case SH file doesnt creat .env file you can create it manually and just copy this variables
 POSTGRES_HOST="ec2-3-217-14-181.compute-1.amazonaws.com"
 POSTGRES_PORT="5432"
 POSTGRES_USER="wurhfjxedwysmc"
